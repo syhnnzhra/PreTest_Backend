@@ -9,25 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function index(Request $request)
-    {
-        $user = User::where('email', $request->email)->first();
-
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return response(['message' => ['Credentials do not match']], 401);
-        }
-
-        $token = $user->createToken('my-app-token');
-
-        $response = [
-            'user' => $user,
-            'token' => $token->plainTextToken,
-        ];
-
-        return response($response, 200);
-    }
-
-
     public function register(Request $request)
     {
         $validatedData = $request->validate([

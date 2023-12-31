@@ -20,8 +20,8 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/register', [UserController::class, 'register_view']);
-Route::get('/login', [UserController::class, 'login_view']);
+// Route::get('/register', [UserController::class, 'register_view']);
+// Route::get('/login', [UserController::class, 'login_view']);
 
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);

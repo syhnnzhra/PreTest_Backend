@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BooksAPIController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +22,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::apiResource('books', BooksAPIController::class)->middleware('auth:sanctum');
-Route::post('login', [UserController::class, 'index']);
+Route::put('/books/{id}', [BooksAPIController::class, 'update'])->middleware('auth:sanctum');
+Route::post('login', [AuthAPIController::class, 'login']);
+Route::post('register', [AuthAPIController::class, 'register']);
+Route::post('logout', [AuthAPIController::class, 'logout'])->middleware('auth:sanctum');
 
 // Route::get('books', [BooksAPIController::class, 'index']);
 // Route::get('books/{id}', [BooksAPIController::class, 'show']);
