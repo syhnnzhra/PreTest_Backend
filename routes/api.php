@@ -20,11 +20,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
+Route::apiResource('books', BooksAPIController::class)->middleware('auth:sanctum');
+Route::post('login', [UserController::class, 'index']);
+
 // Route::get('books', [BooksAPIController::class, 'index']);
 // Route::get('books/{id}', [BooksAPIController::class, 'show']);
 // Route::post('books', [BooksAPIController::class, 'store']);
 // Route::put('books/{id}', [BooksAPIController::class, 'update']);
 // Route::delete('books/{id}', [BooksAPIController::class, 'destroy']);
-
-Route::apiResource('books', BooksAPIController::class);
-Route::post('login', [UserController::class, 'index']);

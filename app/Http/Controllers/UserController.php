@@ -12,20 +12,19 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $user = User::where('email', $request->email)->first();
-        dd($user);
 
         if (!$user || !Hash::check($request->password, $user->password)) {
-            return response(['message' => ['Credentials do not match']], 404);
+            return response(['message' => ['Credentials do not match']], 401);
         }
 
-        $token = $user->createToken('my-app-token')->plainText();
+        $token = $user->createToken('my-app-token');
 
         $response = [
             'user' => $user,
-            'token' => $token,
+            'token' => $token->plainTextToken,
         ];
 
-        return response($response, 201);
+        return response($response, 200);
     }
 
 
